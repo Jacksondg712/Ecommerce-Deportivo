@@ -291,14 +291,15 @@ button:hover{
  width: 100%;
  padding: 0%;
  margin-left: 0;
+
 }
 
 .listado{
-  padding: 20px;
-
+  padding: 20px 0px 20px 20px;
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
+
 }
 
 .eliminar{
@@ -320,6 +321,11 @@ button:hover{
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
+}
+
+.total{
+  margin-left: 10px;
+  padding-left: 10px;
 }
 
 
@@ -628,6 +634,7 @@ button:hover{
 
   .port_conTarjet{
     height: auto;
+    border: 1px solid black;
     background-image: url("/imagenes/catalogo/fondoCatalogo.jpg");
     padding-bottom: 50px;
   }
@@ -646,11 +653,10 @@ button:hover{
 
   .port_target:hover{
     border: 1px solid #A569BD;
+    
   }
 
-  .port_image{
-    /* border-radius: 5% 5% 0% 0%; */
-  }
+  
 
   .port_conlist{
     display: flex;

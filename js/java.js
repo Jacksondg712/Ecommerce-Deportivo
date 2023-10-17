@@ -137,94 +137,43 @@
 
   const botonesAgregar = document.querySelectorAll(".agregar");
   const listaCarrito = document.getElementById("lista-carrito");
-
-  const resultado = document.getElementById("resultado");
+  const totalSpan = document.getElementById("total");
   
+  let total = 0;
+
   // Agrega un controlador de eventos a cada botón "Agregar"
   botonesAgregar.forEach(function(boton) {
     boton.addEventListener("click", function() {
       const producto = boton.parentElement;
       const nombreProducto = producto.querySelector("h3").textContent;
-      const precioProducto = producto.querySelector("p").textContent;
+      const precioProducto = parseFloat(producto.querySelector("p").textContent.replace("Precio: $", ""));
+  
+
       
       // Crea un elemento de lista para el carrito
       const elementoLista = document.createElement("li");
-      elementoLista.innerHTML = `
-       ${nombreProducto} - ${parseFloat(precioProducto)}
-      <button class="eliminar">Eliminar</button> 
+      elementoLista.innerHTML = `<div class="listado">
+       ${nombreProducto} - ${precioProducto}
+      <button class="eliminar">Eliminar</button></div>
       `;
+
+      listaCarrito.appendChild(elementoLista);
+      total += precioProducto;
+      totalSpan.textContent = total.toFixed(2);
+
+     
       
       // Agrega un controlador de eventos al botón "Eliminar"
-      const botonEliminar = elementoLista.querySelector(".eliminar");
-      botonEliminar.addEventListener("click", function() {
-        elementoLista.remove(); // Elimina el producto del carrito al hacer clic
+      const botonesEliminar = elementoLista.querySelectorAll(".eliminar");
+      botonesEliminar.forEach(function(botonEliminar) {
+        botonEliminar.addEventListener("click", function() {
+          listaCarrito.removeChild(elementoLista);
+          total -= precioProducto;
+          totalSpan.textContent = total.toFixed(2);
+          
+        });
       });
-      
-      // Agrega el elemento de lista al carrito
-      listaCarrito.appendChild(elementoLista);
-      console.log(parseFloat(precioProducto));
-
-       
-       
-
-// Función para obtener los datos numéricos, sumarlos y mostrar el resultado
-// Calcula la suma inicial al cargar la página
-  
-  // Escucha cambios en la lista y recalcula la suma cuando cambia
-  // listaCarrito.addEventListener("DOMSubtreeModified", calcularSuma);
-      
     });
-  });
-  function calcularSuma() {
-    let suma = 5;
-  
-      for (let i = 0; i < listaCarrito.length; i++) {
-        const valor = parseInt(listaCarrito[i].textContent); // Convierte el contenido a número
-        if (!isNaN(valor)) {
-          suma += valor;
-        }
-      }
-  
-      
-      
-      resultado.textContent = "Resultado: " + suma;
-    }
-    
-    calcularSuma(); 
-
-  console.log(listaCarrito.length);
-
-  listaCarrito.addEventListener("DOMSubtreeModified", calcularSuma);
-
-
-
-  // ocultar el "no hay productos"
-  
+    });
   
 
-
-
-
-// const miLista = document.getElementById("lista-carrito");
-
-// // Función para obtener los datos numéricos, sumarlos y mostrar el resultado
-// function calcularSuma() {
-//   let suma = 5;
-
-//     for (let i = 0; i < miLista.length; i++) {
-//       const valor = parseInt(miLista[i].textContent); // Convierte el contenido a número
-//       if (!isNaN(valor)) {
-//         suma += valor;
-//       }
-//     }
-
-    
-    
-//     resultado.textContent = "Resultado: " + suma;
-//   }
-  
-//   calcularSuma(); // Calcula la suma inicial al cargar la página
-  
-//   // Escucha cambios en la lista y recalcula la suma cuando cambia
-//   miLista.addEventListener("DOMSubtreeModified", calcularSuma);
-  
